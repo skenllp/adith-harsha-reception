@@ -1,0 +1,343 @@
+/* ============================================================
+   Scene architecture
+   Every block is one component:
+
+     .scene
+       .section-bg        ← real <img> filling the section
+       .section-overlay
+       .section-content   ← lives in the same box as the image
+
+   The image defines the visual stage. Content uses % of that
+   stage (CSS grid tracks), so type moves with the artwork —
+   never with fixed viewport pixels.
+   ============================================================ */
+
+:root{
+  --safe-x: clamp(1.1rem, 5.5vw, 2.75rem);
+  --safe-y: clamp(2.4rem, 7vw, 5.5rem);
+  --content-max: 42rem;
+  --content-wide: 68rem;
+
+  /* Hero artwork safe zone — % of the FULL SCREEN section
+     (tuned to the gold dividers / clear centre of the mandapam) */
+  --hero-safe-top: 22%;
+  --hero-safe-bottom: 36%;
+  --hero-safe-side: 11%;
+}
+
+/* ---------- Base scene ---------- */
+.scene{
+  position:relative;
+  isolation:isolate;
+  display:grid;
+  grid-template-columns:minmax(0,1fr);
+  grid-template-rows:minmax(0,1fr);
+  width:100%;
+  overflow:hidden;
+  color:var(--ink);
+}
+
+.scene > .section-bg,
+.scene > picture.section-bg,
+.scene > .section-overlay,
+.scene > .section-content,
+.scene > .scroll-indicator{
+  min-width:0;
+}
+
+.section-bg,
+picture.section-bg{
+  display:block;
+  width:100%;
+  height:100%;
+  pointer-events:none;
+  user-select:none;
+}
+picture.section-bg img,
+img.section-bg{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  object-position:center center;
+  display:block;
+}
+
+.section-overlay{
+  z-index:1;
+  pointer-events:none;
+}
+
+.section-content{
+  position:relative;
+  z-index:2;
+  display:flex;
+  flex-direction:column;
+  width:100%;
+  max-width:var(--content-wide);
+  margin-inline:auto;
+  padding:
+    var(--safe-y)
+    var(--safe-x)
+    calc(var(--safe-y) + env(safe-area-inset-bottom, 0px));
+  box-sizing:border-box;
+}
+
+.section-content > .sec-head,
+.section-content > .lede,
+.section-content > .facts,
+.section-content > .countdown,
+.section-content > .story-grid,
+.section-content > .story-prose,
+.section-content > .tl,
+.section-content > .couple-grid,
+.section-content > .family-grid,
+.section-content > .family-foot,
+.section-content > .temple-card,
+.section-content > .lux-card,
+.section-content > .venue-grid,
+.section-content > .contact,
+.section-content > .masonry,
+.section-content > .photo-wall,
+.section-content > .photo-wall-stage,
+.section-content > .note-box,
+.section-content > .finale-stage,
+.section-content > .finale-sub,
+.section-content > .finale-ml{
+  width:100%;
+  max-width:var(--content-max);
+  margin-inline:auto;
+}
+.section-content > .facts,
+.section-content > .story-grid,
+.section-content > .couple-grid,
+.section-content > .family-grid,
+.section-content > .venue-grid,
+.section-content > .masonry,
+.section-content > .photo-wall,
+.section-content > .photo-wall-stage,
+.section-content > .lux-card{
+  max-width:var(--content-wide);
+}
+.section-content > .photo-wall,
+.section-content > .photo-wall-stage{
+  max-width:min(1180px,100%);
+}
+
+/* Tone plates */
+.scene--ivory{background:#14110A;color:var(--ink)}
+.scene--beige{background:#1A130C;color:var(--ink)}
+.scene--dark{background:#100E07;color:#F3E9D6}
+.scene--finale{background:#0F0A05;color:#F3E9D6}
+.scene--note{background:#1A150C;color:var(--ink)}
+
+.scene--ivory .section-overlay{
+  background:
+    radial-gradient(110% 60% at 50% 0%,rgba(232,169,74,.10),transparent 60%),
+    linear-gradient(180deg,rgba(10,8,5,.10),rgba(10,8,5,.45));
+}
+.scene--beige .section-overlay{
+  background:
+    radial-gradient(90% 55% at 50% 0%,rgba(107,106,42,.16),transparent 62%),
+    linear-gradient(180deg,rgba(10,8,5,.10),rgba(10,8,5,.5));
+}
+.scene--dark .section-overlay{
+  background:
+    radial-gradient(90% 55% at 50% 0%,rgba(217,164,65,.16),transparent 62%),
+    linear-gradient(180deg,rgba(20,14,8,.2),rgba(20,14,8,.55));
+}
+.scene--finale .section-overlay{
+  background:
+    radial-gradient(80% 55% at 50% 45%,rgba(217,164,65,.14),transparent 66%),
+    linear-gradient(180deg,rgba(15,10,5,.1),rgba(15,10,5,.65));
+}
+
+/* ============================================================
+   FULL-SCREEN ART  ·  image fills the viewport; content fits IT
+   ============================================================
+   One grid. The <img> covers the whole section (object-fit:cover).
+   Content occupies the centre tracks — those % are of the same
+   box the image fills, so typography tracks the artwork as the
+   screen changes size/shape.
+*/
+.scene--screen{
+  min-height:100svh;
+  min-height:100vh;
+  height:100svh;
+  height:100vh;
+  width:100%;
+  background:#0A0805;
+  display:grid;
+  grid-template-columns:
+    var(--hero-safe-side)
+    minmax(0,1fr)
+    var(--hero-safe-side);
+  grid-template-rows:
+    var(--hero-safe-top)
+    minmax(0,1fr)
+    var(--hero-safe-bottom);
+  padding:0;
+}
+
+/* Image + overlay paint the entire screen */
+.scene--screen > .section-bg,
+.scene--screen > picture.section-bg,
+.scene--screen > .section-overlay{
+  grid-column:1 / -1;
+  grid-row:1 / -1;
+  width:100%;
+  height:100%;
+  z-index:0;
+}
+.scene--screen > .section-overlay{z-index:1}
+
+.scene--screen > picture.section-bg{
+  display:block; /* override display:contents so it can occupy the grid cell */
+}
+.scene--screen > picture.section-bg > img,
+.scene--screen > img.section-bg{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  object-position:center center;
+}
+
+/* Content sits only in the clear centre of the artwork */
+.scene--screen > .section-content{
+  grid-column:2;
+  grid-row:2;
+  z-index:2;
+  max-width:none;
+  width:100%;
+  height:100%;
+  margin:0;
+  padding:clamp(0.25rem, 2%, 0.75rem);
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  text-align:center;
+  box-sizing:border-box;
+}
+
+/* Scroll cue in the bottom safe band of the SAME image */
+.scene--screen > .scroll-indicator{
+  grid-column:1 / -1;
+  grid-row:3;
+  z-index:3;
+  justify-self:center;
+  align-self:end;
+  margin-bottom:clamp(10px, 18%, 36px);
+  opacity:0;
+  transition:opacity .6s ease .3s;
+}
+
+.scene--hero .section-overlay{
+  background:
+    radial-gradient(60% 34% at 50% 40%,rgba(8,6,3,.38),transparent 72%),
+    linear-gradient(180deg,rgba(8,6,3,.30) 0%,transparent 22%,transparent 70%,rgba(8,6,3,.45) 100%);
+}
+
+/* Wider screens crop more of the portrait sides — keep centre safe, nudge sides in */
+@media (min-aspect-ratio: 3/4){
+  .scene--screen{
+    --hero-safe-side: 18%;
+    --hero-safe-top: 24%;
+    --hero-safe-bottom: 18%;
+  }
+}
+@media (min-aspect-ratio: 1/1){
+  .scene--screen{
+    --hero-safe-side: 26%;
+    --hero-safe-top: 22%;
+    --hero-safe-bottom: 16%;
+  }
+  .scene--screen > picture.section-bg > img,
+  .scene--screen > img.section-bg{
+    object-position:center 42%;
+  }
+}
+@media (min-aspect-ratio: 16/10){
+  .scene--screen{
+    --hero-safe-side: 32%;
+    --hero-safe-top: 20%;
+    --hero-safe-bottom: 14%;
+  }
+}
+/* Tall phones — more headroom for garlands / lamps */
+@media (max-aspect-ratio: 9/19){
+  .scene--screen{
+    --hero-safe-top: 24%;
+    --hero-safe-bottom: 38%;
+    --hero-safe-side: 10%;
+  }
+}
+@media (max-height: 480px) and (orientation:landscape){
+  .scene--screen{
+    --hero-safe-top: 12%;
+    --hero-safe-bottom: 10%;
+    --hero-safe-side: 22%;
+  }
+}
+
+/* ============================================================
+   FLOW SCENES  ·  content height drives the section; bg covers it
+   ============================================================ */
+.scene--flow{
+  display:block;
+  min-height:auto;
+}
+.scene--flow > .section-bg{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  z-index:0;
+}
+.scene--flow > .section-overlay{
+  position:absolute;
+  inset:0;
+  z-index:1;
+}
+.scene--flow > .section-content{
+  position:relative;
+  z-index:2;
+}
+
+.section-content--center{
+  text-align:center;
+  justify-content:center;
+  align-items:center;
+  min-height:min(100svh, 40rem);
+}
+
+/* ============================================================
+   Hero load gate
+   ============================================================ */
+.scene--hero{
+  opacity:0;visibility:hidden;
+  transition:opacity .55s ease,visibility 0s linear .55s;
+}
+.scene--hero.loaded{
+  opacity:1;visibility:visible;
+  transition:opacity .55s ease,visibility 0s;
+}
+.scene--hero > .section-bg,
+.scene--hero > picture.section-bg,
+.scene--hero > picture.section-bg > img{
+  opacity:0;
+  transition:opacity .55s ease;
+}
+.scene--hero.loaded > .section-bg,
+.scene--hero.loaded > picture.section-bg,
+.scene--hero.loaded > picture.section-bg > img{
+  opacity:1;
+}
+.scene--hero > .section-content{
+  opacity:0;
+  transform:translate3d(0,14px,0);
+  transition:opacity .7s var(--ease) .15s, transform .7s var(--ease) .15s;
+}
+.scene--hero.loaded.text-ready > .section-content{
+  opacity:1;transform:none;
+}
+.scene--hero.loaded.text-ready > .scroll-indicator{opacity:1}

@@ -1,0 +1,118 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" fill="none">
+  <defs>
+    <radialGradient id="rose1" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#8A9E78" stop-opacity="0.95"/>
+      <stop offset="60%" stop-color="#6B7D56" stop-opacity="0.8"/>
+      <stop offset="100%" stop-color="#626D53" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="rose2" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#D4A373" stop-opacity="0.9"/>
+      <stop offset="70%" stop-color="#C08050" stop-opacity="0.6"/>
+      <stop offset="100%" stop-color="#C08050" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="leaf1" cx="30%" cy="30%" r="70%">
+      <stop offset="0%" stop-color="#7A9E7E" stop-opacity="0.85"/>
+      <stop offset="100%" stop-color="#4E7055" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="petal" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#B8CCAA" stop-opacity="0.9"/>
+      <stop offset="100%" stop-color="#B8CCAA" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <!-- Main stems/vines -->
+  <path d="M5 5 C 40 30, 60 80, 80 120 C 100 160, 95 200, 110 250 C 125 300, 140 340, 160 380" stroke="#6B8F5E" stroke-width="1.8" fill="none" opacity="0.6"/>
+  <path d="M5 5 C 60 20, 110 50, 150 90 C 185 125, 210 170, 230 220" stroke="#6B8F5E" stroke-width="1.5" fill="none" opacity="0.5"/>
+  <path d="M30 5 C 70 35, 100 70, 130 110" stroke="#8FA07A" stroke-width="1.2" fill="none" opacity="0.45"/>
+
+  <!-- Branch from main stem -->
+  <path d="M80 120 C 110 110, 145 100, 175 85" stroke="#6B8F5E" stroke-width="1.2" fill="none" opacity="0.5"/>
+  <path d="M110 250 C 140 235, 170 215, 200 195" stroke="#6B8F5E" stroke-width="1.1" fill="none" opacity="0.45"/>
+  <path d="M80 120 C 65 145, 50 165, 40 195" stroke="#6B8F5E" stroke-width="1" fill="none" opacity="0.4"/>
+
+  <!-- Large rose — top left cluster -->
+  <ellipse cx="62" cy="60" rx="30" ry="26" fill="url(#rose1)" opacity="0.9"/>
+  <ellipse cx="55" cy="52" rx="20" ry="17" fill="#7A9660" opacity="0.7"/>
+  <ellipse cx="65" cy="58" rx="14" ry="12" fill="#6B8550" opacity="0.8"/>
+  <circle cx="63" cy="58" r="8" fill="#4E7055" opacity="0.9"/>
+  <!-- Rose petals -->
+  <ellipse cx="48" cy="48" rx="11" ry="8" fill="#A8C090" opacity="0.6" transform="rotate(-30 48 48)"/>
+  <ellipse cx="80" cy="50" rx="10" ry="7" fill="#A8C090" opacity="0.55" transform="rotate(20 80 50)"/>
+  <ellipse cx="62" cy="38" rx="9" ry="7" fill="#BED0A8" opacity="0.6" transform="rotate(5 62 38)"/>
+  <ellipse cx="62" cy="78" rx="10" ry="7" fill="#849670" opacity="0.5" transform="rotate(-10 62 78)"/>
+
+  <!-- Small bud near main rose -->
+  <ellipse cx="30" cy="38" rx="12" ry="10" fill="url(#rose1)" opacity="0.7"/>
+  <ellipse cx="30" cy="36" rx="7" ry="6" fill="#6B8550" opacity="0.8"/>
+
+  <!-- Gold accent flower -->
+  <ellipse cx="148" cy="78" rx="22" ry="18" fill="url(#rose2)" opacity="0.8"/>
+  <ellipse cx="148" cy="76" rx="14" ry="12" fill="#C99055" opacity="0.75"/>
+  <circle cx="148" cy="77" r="7" fill="#B07030" opacity="0.9"/>
+  <ellipse cx="135" cy="70" rx="9" ry="6" fill="#D4B070" opacity="0.6" transform="rotate(-25 135 70)"/>
+  <ellipse cx="162" cy="70" rx="8" ry="6" fill="#D4B070" opacity="0.55" transform="rotate(20 162 70)"/>
+  <ellipse cx="148" cy="62" rx="8" ry="6" fill="#E0C080" opacity="0.5"/>
+  <ellipse cx="148" cy="94" rx="8" ry="6" fill="#C09040" opacity="0.45"/>
+
+  <!-- Second large rose lower -->
+  <ellipse cx="95" cy="175" rx="28" ry="24" fill="url(#rose1)" opacity="0.85"/>
+  <ellipse cx="88" cy="168" rx="18" ry="15" fill="#7A9660" opacity="0.7"/>
+  <ellipse cx="97" cy="174" rx="13" ry="11" fill="#6B8550" opacity="0.8"/>
+  <circle cx="95" cy="173" r="7" fill="#4E7055" opacity="0.9"/>
+  <ellipse cx="78" cy="166" rx="10" ry="7" fill="#A8C090" opacity="0.6" transform="rotate(-25 78 166)"/>
+  <ellipse cx="112" cy="165" rx="10" ry="7" fill="#A8C090" opacity="0.55" transform="rotate(20 112 165)"/>
+  <ellipse cx="95" cy="155" rx="9" ry="6" fill="#BED0A8" opacity="0.55" transform="rotate(5 95 155)"/>
+  <ellipse cx="95" cy="192" rx="10" ry="7" fill="#849670" opacity="0.5"/>
+
+  <!-- Small pink buds scattered -->
+  <ellipse cx="168" cy="148" rx="14" ry="12" fill="url(#petal)" opacity="0.8"/>
+  <ellipse cx="168" cy="146" rx="8" ry="7" fill="#A8C090" opacity="0.75"/>
+  <circle cx="168" cy="147" r="4" fill="#6B8550" opacity="0.85"/>
+
+  <ellipse cx="45" cy="148" rx="11" ry="9" fill="url(#rose1)" opacity="0.6"/>
+  <ellipse cx="45" cy="147" rx="6" ry="5" fill="#7A9660" opacity="0.7"/>
+
+  <!-- Large gold flower lower right -->
+  <ellipse cx="185" cy="190" rx="20" ry="17" fill="url(#rose2)" opacity="0.75"/>
+  <ellipse cx="185" cy="188" rx="12" ry="10" fill="#C99055" opacity="0.7"/>
+  <circle cx="185" cy="189" r="6" fill="#A06520" opacity="0.9"/>
+
+  <!-- Leaves — various shapes -->
+  <!-- Large leaf top -->
+  <path d="M90 90 C 120 70, 150 75, 160 95 C 155 110, 125 115, 100 105 Z" fill="url(#leaf1)" opacity="0.7"/>
+  <path d="M120 82 L 148 98" stroke="#4E7055" stroke-width="0.8" fill="none" opacity="0.5"/>
+
+  <!-- Leaf from vine -->
+  <path d="M60 155 C 80 135, 115 130, 120 150 C 118 168, 88 170, 68 162 Z" fill="url(#leaf1)" opacity="0.65"/>
+  <path d="M75 145 L 112 156" stroke="#4E7055" stroke-width="0.7" fill="none" opacity="0.45"/>
+
+  <!-- Small leaves -->
+  <path d="M35 110 C 50 100, 68 103, 70 118 C 68 130, 52 130, 40 122 Z" fill="#6B8F5E" opacity="0.55"/>
+  <path d="M38 113 L 65 120" stroke="#4E7055" stroke-width="0.7" fill="none" opacity="0.4"/>
+
+  <path d="M115 220 C 135 208, 160 212, 162 228 C 160 242, 138 244, 122 235 Z" fill="url(#leaf1)" opacity="0.6"/>
+
+  <path d="M50 220 C 65 208, 88 210, 90 226 C 88 240, 66 242, 54 232 Z" fill="#5E7F55" opacity="0.5"/>
+
+  <!-- Tiny leaves/sprigs -->
+  <path d="M175 110 C 185 102, 198 104, 198 115 C 197 125, 185 126, 177 118 Z" fill="#7A9E7E" opacity="0.55"/>
+  <path d="M175 250 C 188 240, 202 243, 202 256 C 200 268, 188 268, 178 260 Z" fill="#6B8F5E" opacity="0.5"/>
+
+  <!-- Tiny berries/dots -->
+  <circle cx="138" cy="125" r="4" fill="#4E7055" opacity="0.7"/>
+  <circle cx="145" cy="133" r="3" fill="#4E7055" opacity="0.6"/>
+  <circle cx="130" cy="130" r="3.5" fill="#6B8550" opacity="0.65"/>
+
+  <circle cx="55" cy="200" r="3.5" fill="#D4A373" opacity="0.65"/>
+  <circle cx="62" cy="208" r="3" fill="#C99055" opacity="0.6"/>
+
+  <!-- Tiny dot cluster -->
+  <circle cx="170" cy="165" r="3" fill="#4E7055" opacity="0.55"/>
+  <circle cx="176" cy="172" r="2.5" fill="#6B8550" opacity="0.5"/>
+  <circle cx="164" cy="172" r="2" fill="#4E7055" opacity="0.5"/>
+
+  <!-- Fine decorative tendrils -->
+  <path d="M160 120 C 170 112, 178 118, 172 128" stroke="#6B8F5E" stroke-width="0.8" fill="none" opacity="0.4"/>
+  <path d="M120 200 C 130 192, 138 198, 133 210" stroke="#6B8F5E" stroke-width="0.8" fill="none" opacity="0.35"/>
+  <path d="M70 240 C 80 230, 92 235, 85 248" stroke="#8FA07A" stroke-width="0.7" fill="none" opacity="0.4"/>
+</svg>

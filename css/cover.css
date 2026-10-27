@@ -1,0 +1,384 @@
+/* ==========================================================================
+   Cover Invitation — loader + "Open Invitation" gate
+   Extracted from the Afshan & Anjum Nikkah site (Green & Gold theme).
+   Self-contained: drop this file in and change the tokens below to re-theme.
+   ========================================================================== */
+
+@font-face {
+  font-family: 'Edwardian Script ITC';
+  src: url('../fonts/EdwardianScriptITC.woff2') format('woff2'),
+       url('../fonts/EdwardianScriptITC.woff') format('woff'),
+       url('../fonts/EdwardianScriptITC.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* ---- Design tokens ------------------------------------------------------ */
+:root {
+  /* Primary (forest / sage green). The original site named these "maroon";
+     renamed here. Swap these values to re-colour the whole cover. */
+  --cv-primary:        #626D53;
+  --cv-primary-deep:   #404A35;   /* names */
+  --cv-primary-light:  #8A9678;
+  --cv-primary-pale:   #D4DBC8;   /* bottom glyph */
+  --cv-primary-rgb:    98, 109, 83; /* for rgba() shadows */
+
+  /* Accent (warm gold) */
+  --cv-gold:           #C9A07A;   /* ampersand, borders, dividers */
+  --cv-gold-dark:      #9A7040;   /* eyebrow, venue */
+  --cv-gold-light:     #E8D0AA;
+
+  /* Surfaces & text */
+  --cv-bg:             #FBF7F0;   /* ivory */
+  --cv-cream:          #FFFDF8;
+  --cv-text:           #5A4A3A;
+  --cv-text-light:     #8A7460;
+  --cv-line:           rgba(183, 140, 100, 0.3);
+
+  /* Type */
+  --cv-font-display:   'Cinzel', 'Playfair Display', serif;
+  --cv-font-script:    'Edwardian Script ITC', 'Great Vibes', cursive;
+  --cv-font-serif:     'Cormorant Garamond', Georgia, serif;
+  --cv-font-arabic:    'Amiri', serif;
+
+  /* Spacing */
+  --cv-sp-1: 8px;
+  --cv-sp-2: 16px;
+  --cv-sp-3: 24px;
+  --cv-sp-4: 40px;
+
+  /* Motion */
+  --cv-ease:      cubic-bezier(0.22, 1, 0.36, 1);
+  --cv-dur-fast:  0.35s;
+  --cv-dur-med:   0.7s;
+  --cv-dur-slow:  1.4s;
+}
+
+.cv-loader, .cv-loader *, .cv-gate, .cv-gate * { box-sizing: border-box; }
+
+/* ==========================================================================
+   Loader
+   ========================================================================== */
+.cv-loader {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: var(--cv-bg);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--cv-sp-2);
+  transition:
+    opacity    var(--cv-dur-slow) var(--cv-ease),
+    visibility var(--cv-dur-slow) var(--cv-ease);
+}
+.cv-loader.is-hidden {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.cv-loader__monogram {
+  font-family: var(--cv-font-script);
+  font-size: clamp(3rem, 8vw, 4.5rem);
+  line-height: 1;
+  color: var(--cv-primary);
+  -webkit-text-stroke: 0.4px currentColor;
+  opacity: 0;
+  animation: cvFadeUp 1.2s var(--cv-ease) 0.2s forwards;
+}
+
+.cv-loader__tagline {
+  font-family: var(--cv-font-display);
+  font-size: 0.65rem;
+  letter-spacing: 0.45em;
+  text-transform: uppercase;
+  color: var(--cv-gold-dark);
+  margin-bottom: var(--cv-sp-3);
+  opacity: 0;
+  animation: cvFadeUp 1.2s var(--cv-ease) 0.6s forwards;
+}
+
+.cv-loader__bar-wrap {
+  position: relative;
+  width: 180px;
+  height: 1px;
+  background: var(--cv-line);
+  overflow: hidden;
+}
+.cv-loader__bar {
+  position: absolute;
+  left: -40%;
+  top: 0;
+  bottom: 0;
+  width: 40%;
+  background: linear-gradient(90deg, transparent, var(--cv-primary), var(--cv-gold), transparent);
+  animation: cvSweep 1.6s ease-in-out infinite;
+}
+
+@keyframes cvFadeUp {
+  0%   { opacity: 0; transform: translateY(12px); filter: blur(6px); }
+  100% { opacity: 1; transform: translateY(0);    filter: blur(0); }
+}
+@keyframes cvSweep {
+  0%   { left: -40%; }
+  100% { left: 100%; }
+}
+
+/* ==========================================================================
+   Gate (the cover screen)
+   ========================================================================== */
+.cv-gate {
+  position: fixed;
+  inset: 0;
+  z-index: 500;
+  background: var(--cv-bg);
+  color: var(--cv-text);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  transition:
+    opacity    var(--cv-dur-slow) var(--cv-ease),
+    filter     var(--cv-dur-slow) var(--cv-ease),
+    visibility var(--cv-dur-slow) var(--cv-ease);
+}
+/* Opening: fades + blurs away */
+.cv-gate.is-open {
+  opacity: 0;
+  filter: blur(18px);
+  visibility: hidden;
+  pointer-events: none;
+}
+
+/* Watercolour floral corners (top-left, bottom-right rotated 180°) */
+.cv-gate__floral {
+  position: absolute;
+  pointer-events: none;
+}
+.cv-gate__floral img {
+  display: block;
+  width: clamp(120px, 22vw, 240px);
+  opacity: 0.75;
+}
+.cv-gate__floral--tl { top: -15px;    left: -20px; }
+.cv-gate__floral--br { bottom: -15px; right: -20px; transform: rotate(180deg); }
+
+.cv-gate__inner {
+  width: 100%;
+  max-width: 520px;
+  padding: var(--cv-sp-4) var(--cv-sp-3);
+}
+
+/* Every line fades up + un-blurs, staggered top → bottom */
+.cv-gate__arabic {
+  font-family: var(--cv-font-arabic);
+  font-size: clamp(1.4rem, 3.5vw, 2rem);
+  color: var(--cv-primary);
+  margin: 0 0 var(--cv-sp-2);
+  opacity: 0;
+  animation: cvGateReveal 1s var(--cv-ease) 0.1s forwards;
+}
+
+.cv-gate__eyebrow {
+  font-family: var(--cv-font-display);
+  font-size: 0.7rem;
+  letter-spacing: 0.38em;
+  text-transform: uppercase;
+  color: var(--cv-gold-dark);
+  margin: 0 0 var(--cv-sp-2);
+  opacity: 0;
+  animation: cvGateReveal 1s var(--cv-ease) 0.4s forwards;
+}
+
+.cv-gate__names {
+  font-family: var(--cv-font-script);
+  font-weight: 500;
+  font-size: clamp(3.8rem, 11vw, 6.2rem);
+  line-height: 1.25;
+  letter-spacing: 0.06em;
+  color: var(--cv-primary-deep);
+  margin: 0 0 var(--cv-sp-2);
+  padding: 0.1em 0;
+  -webkit-text-stroke: 0.5px currentColor;
+  opacity: 0;
+  animation: cvGateReveal 1s var(--cv-ease) 0.65s forwards;
+}
+.cv-gate__amp {
+  display: inline-block;
+  position: relative;
+  top: -0.05em;
+  padding: 0 0.12em;
+  font-size: 0.95em;
+  color: var(--cv-gold);
+  -webkit-text-stroke: 0.5px currentColor;
+}
+
+.cv-gate__invite-text {
+  font-family: var(--cv-font-serif);
+  font-style: italic;
+  font-weight: 500;
+  font-size: 1rem;
+  line-height: 1.75;
+  color: var(--cv-text-light);
+  max-width: 360px;
+  margin: 0 auto var(--cv-sp-2);
+  opacity: 0;
+  animation: cvGateReveal 1s var(--cv-ease) 0.85s forwards;
+}
+
+.cv-gate__date {
+  font-family: var(--cv-font-display);
+  font-size: 0.75rem;
+  letter-spacing: 0.22em;
+  color: var(--cv-text);
+  margin: 0 0 var(--cv-sp-3);
+  opacity: 0;
+  animation: cvGateReveal 1s var(--cv-ease) 1s forwards;
+}
+
+.cv-gate__venue {
+  font-family: var(--cv-font-display);
+  font-size: 0.68rem;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--cv-gold-dark);
+  margin: -8px 0 var(--cv-sp-3);
+  opacity: 0;
+  animation: cvGateReveal 1s var(--cv-ease) 1.1s forwards;
+}
+
+/* Bottom ornament:  ——— ❋ ——— */
+.cv-gate__divider {
+  position: absolute;
+  bottom: var(--cv-sp-4);
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: var(--cv-sp-2);
+  width: 200px;
+}
+.cv-gate__divider span:not(.cv-gate__divider-glyph) {
+  display: block;
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--cv-gold), transparent);
+}
+.cv-gate__divider-glyph {
+  flex-shrink: 0;
+  font-size: 1.1rem;
+  color: var(--cv-primary-pale);
+}
+
+@keyframes cvGateReveal {
+  0%   { opacity: 0; transform: translateY(16px); filter: blur(8px); }
+  100% { opacity: 1; transform: translateY(0);    filter: blur(0); }
+}
+
+/* ==========================================================================
+   Pill button (outlined gold → fills green from below on hover)
+   ========================================================================== */
+.cv-btn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: var(--cv-sp-3);
+  padding: 15px 36px;
+  font-family: var(--cv-font-display);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  color: var(--cv-primary-deep);
+  background: transparent;
+  border: 1px solid var(--cv-gold);
+  border-radius: 999px;
+  cursor: pointer;
+  overflow: hidden;
+  isolation: isolate;
+  transition:
+    color      var(--cv-dur-fast) var(--cv-ease),
+    transform  var(--cv-dur-fast) var(--cv-ease),
+    box-shadow var(--cv-dur-fast) var(--cv-ease);
+}
+.cv-btn::before {               /* the green fill that slides up */
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border-radius: 999px;
+  background: linear-gradient(135deg, var(--cv-primary), var(--cv-primary-light));
+  transform: translateY(102%);
+  transition: transform var(--cv-dur-med) var(--cv-ease);
+}
+.cv-btn:hover,
+.cv-btn:focus-visible {
+  color: var(--cv-cream);
+  border-color: var(--cv-primary);
+  box-shadow: 0 10px 34px rgba(var(--cv-primary-rgb), 0.35);
+  transform: translateY(-2px);
+}
+.cv-btn:hover::before,
+.cv-btn:focus-visible::before { transform: translateY(0); }
+.cv-btn:focus-visible {
+  outline: 2px solid var(--cv-primary);
+  outline-offset: 3px;
+}
+
+.cv-btn__icon {
+  display: inline-block;
+  font-size: 0.7rem;
+  color: var(--cv-gold);
+  transform: rotate(45deg);
+  transition: color var(--cv-dur-fast);
+}
+.cv-btn:hover .cv-btn__icon,
+.cv-btn:focus-visible .cv-btn__icon { color: var(--cv-gold-light); }
+
+/* Entrance of the gate's button (last item in the stagger) */
+.cv-btn--gate {
+  opacity: 0;
+  animation: cvGateReveal 1s var(--cv-ease) 1.3s forwards;
+}
+
+/* Click ripple (span is injected by cover.js) */
+.cv-ripple {
+  position: absolute;
+  border-radius: 50%;
+  background: rgba(255, 253, 248, 0.5);
+  transform: scale(0);
+  pointer-events: none;
+  animation: cvRipple 0.65s var(--cv-ease);
+}
+@keyframes cvRipple { to { transform: scale(4); opacity: 0; } }
+
+/* ==========================================================================
+   Responsive
+   ========================================================================== */
+@media (max-width: 640px) {
+  .cv-gate__floral img   { width: clamp(80px, 28vw, 130px); }
+  .cv-gate__arabic       { font-size: 1.3rem; }
+  .cv-gate__names        { font-size: clamp(3.2rem, 14vw, 4.8rem); line-height: 1.35; }
+}
+
+/* Short landscape phones: shrink names so nothing overflows */
+@media (max-width: 812px) and (orientation: landscape) {
+  .cv-gate__names { font-size: clamp(2.8rem, 8vw, 3.8rem); line-height: 1.35; }
+}
+
+/* ==========================================================================
+   Reduced motion
+   ========================================================================== */
+@media (prefers-reduced-motion: reduce) {
+  .cv-loader *, .cv-gate, .cv-gate *, .cv-btn, .cv-btn::before {
+    animation-duration: 0.01ms !important;
+    animation-delay: 0s !important;
+    transition-duration: 0.01ms !important;
+  }
+}

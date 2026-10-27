@@ -1,0 +1,210 @@
+/* ==========================================================================
+   THEME · "Candlelit Olive & Amber"
+   Matches the reception artwork: olive-green draped ceiling, warm amber
+   candlelight / string-lights, and the gown (its colour is kept only in the artwork).
+
+   Palette (tokens live in style.css :root)
+     night   #0A0805   olive  #3B3A16   amber  #E8A94A / #F0C987
+     moss    #6B6A2A   champagne #F3D9A4   cream  #F6EBD4
+   This file loads last: it lays out the opening page around the couple
+   illustration and darkens every card / form to suit the evening mood.
+   ========================================================================== */
+
+/* ---------- OPENING PAGE (couple illustration) ---------------------------- */
+#landing{background:#0A0805}
+
+/* text block spans the whole screen: names at the top, button at the bottom,
+   so the dancing couple in the middle of the artwork is never covered */
+#landing > .landing-inner.section-content{
+  grid-column:1 / -1;
+  grid-row:1 / -1;
+  justify-content:flex-start;
+  padding:clamp(34px,8svh,84px) 6% max(26px,calc(env(safe-area-inset-bottom,0px) + 22px));
+}
+#landing .landing-names{
+  margin-top:10px;
+  font-size:clamp(34px,10vw,76px);
+  color:#FFF3DC;
+  text-shadow:0 2px 28px rgba(232,169,74,.38),0 2px 6px rgba(0,0,0,.7);
+}
+#landing .landing-names .amp{color:var(--gold-lt)}
+#landing .landing-date{margin-top:12px}
+#landing .btn-open{margin-top:auto}
+#landing .landing-hint{margin-top:14px;color:rgba(246,235,212,.55)}
+
+/* cover photo: no sun-rays, deeper top/bottom so type stays legible */
+#landing > .rays{display:none}
+#landing > .temple-glow{background:radial-gradient(ellipse 60% 30% at 50% 70%,rgba(232,169,74,.16),transparent 70%)}
+#landing > .vignette{
+  background:
+    linear-gradient(180deg,rgba(8,6,3,.78) 0%,rgba(8,6,3,.42) 24%,transparent 46%,transparent 74%,rgba(8,6,3,.7) 100%),
+    radial-gradient(120% 90% at 50% 55%,transparent 55%,rgba(8,6,3,.55) 100%);
+}
+.cover-fallback{
+  background:
+    radial-gradient(90% 55% at 50% 10%,rgba(232,169,74,.30),transparent 62%),
+    radial-gradient(70% 50% at 50% 85%,rgba(107,106,42,.40),transparent 70%),
+    linear-gradient(180deg,#26250E 0%,#14110A 55%,#0A0805 100%);
+}
+.btn-open__inner{
+  background:linear-gradient(145deg,rgba(24,18,9,.78),rgba(10,8,5,.7));
+  border-color:rgba(240,201,135,.6);
+}
+.btn-open__glow{background:radial-gradient(closest-side,rgba(232,169,74,.45),transparent 74%)}
+.btn-open__ring{border-color:rgba(240,201,135,.45)}
+.btn-open__lamp{color:var(--gold-lt)}
+
+/* Landscape screens: show the WHOLE portrait artwork (not a thin slice of it)
+   with a soft blurred extension of the same picture filling the sides. */
+.landing-media::before,
+.scene--hero::before{
+  content:"";position:absolute;inset:-8%;z-index:0;pointer-events:none;
+  background-size:cover;background-position:center;
+  filter:blur(30px) brightness(.55) saturate(1.1);
+  opacity:0;
+}
+.landing-media::before{background-image:url("../assets/images/cover/cover.jpg")}
+.scene--hero::before{background-image:url("../assets/images/hero/hero.jpg")}
+@media (min-aspect-ratio:1/1){
+  .landing-media::before,.scene--hero::before{opacity:1}
+  .landing-media .cover-img,
+  .scene--hero picture.section-bg > img,
+  .scene--hero > img.section-bg{
+    object-fit:contain;
+    object-position:center center;
+    -webkit-mask-image:linear-gradient(90deg,transparent 0,#000 12%,#000 88%,transparent 100%);
+            mask-image:linear-gradient(90deg,transparent 0,#000 12%,#000 88%,transparent 100%);
+  }
+  .scene--screen > picture.section-bg > img,
+  .scene--screen > img.section-bg{object-position:center center}
+  #landing > .landing-inner.section-content{padding-top:clamp(24px,6svh,60px)}
+  #landing .landing-names{flex-direction:row;gap:.35em;align-items:baseline;font-size:clamp(34px,6.4svh,64px)}
+  #landing .landing-names .amp{margin:0}
+}
+
+/* ---------- HERO (venue photo as background) ------------------------------ */
+.hero-names{text-shadow:0 2px 26px rgba(232,169,74,.35),0 2px 4px rgba(0,0,0,.65)}
+.hero-date__en,.hero-date__ml,.hero-bless__en{text-shadow:0 1px 8px rgba(0,0,0,.7)!important}
+.hero-bless--top{padding-top:clamp(36px,7svh,70px)}
+.scroll-indicator,
+.scroll-indicator__word,
+.scroll-indicator__arrow{color:var(--gold-lt)}
+.scroll-indicator__word{text-shadow:0 1px 8px rgba(0,0,0,.8)!important;font-weight:700}
+
+/* ---------- SECTIONS ------------------------------------------------------ */
+#site{background:var(--night)}
+.sec-title{color:var(--ink);text-shadow:0 2px 24px rgba(232,169,74,.16)}
+.kicker{color:var(--brass)}
+.sec-head p{color:var(--ink-soft)}
+.ganapathy-motif svg{color:var(--gold)!important}
+
+.invitation-card h3{text-shadow:0 2px 20px rgba(240,201,135,.2)}
+
+.fact{
+  background:linear-gradient(160deg,rgba(32,26,13,.74),rgba(18,14,8,.7));
+  border-color:rgba(217,164,65,.3);
+}
+.fact::before{border-color:rgba(217,164,65,.16)}
+.fact:hover{border-color:rgba(240,201,135,.6)}
+.fact .ico{color:var(--gold-lt)}
+.fact-v{color:var(--maroon)}
+
+.cd-unit{
+  background:linear-gradient(160deg,rgba(107,106,42,.34),rgba(38,37,14,.28));
+  border-color:rgba(217,164,65,.45);
+  box-shadow:0 10px 28px -12px rgba(0,0,0,.7);
+}
+.cd-unit::before{border-color:rgba(240,201,135,.16)}
+.cd-n{color:#FBE8BE;text-shadow:0 0 18px rgba(240,201,135,.35)}
+.cd-l{color:var(--brass)}
+.cd-sep{color:var(--gold-lt)}
+
+/* venue */
+.venue-card{
+  background:linear-gradient(160deg,#1C170C,#120F08);
+  border-color:rgba(217,164,65,.32);
+}
+.venue-map-embed{border-bottom-color:rgba(217,164,65,.25)}
+.venue-map-embed iframe{filter:invert(.92) hue-rotate(185deg) saturate(.5) brightness(.9) contrast(.95)}
+.venue-name{color:var(--ink)}
+.venue-addr{color:var(--ink-soft)}
+.venue-when{color:var(--maroon)}
+.venue-valet{border-color:rgba(217,164,65,.38);color:var(--gold-lt)}
+.btn--ghost{border-color:rgba(217,164,65,.6);color:var(--gold-lt)}
+.btn--ghost:hover{background:rgba(217,164,65,.14)}
+.btn--gold{background:linear-gradient(145deg,var(--gold-lt),var(--gold));color:#241806}
+
+/* RSVP */
+.rsvp-card{
+  background:linear-gradient(160deg,rgba(30,25,12,.84),rgba(18,14,8,.8));
+  border-color:rgba(217,164,65,.38);
+  box-shadow:0 22px 60px -20px rgba(0,0,0,.8),inset 0 1px 0 rgba(240,201,135,.12);
+}
+.rsvp-label{color:var(--gold-lt)}
+.rsvp-req{color:var(--moss-lt)}
+.rsvp-input{
+  color:var(--ink);
+  background:rgba(10,8,5,.62);
+  border-color:rgba(217,164,65,.4);
+  color-scheme:dark;
+}
+.rsvp-input::placeholder{color:rgba(205,191,160,.5)}
+.rsvp-input:focus{border-color:var(--gold-lt);box-shadow:0 0 0 3px rgba(232,169,74,.24)}
+.rsvp-input[aria-invalid="true"]{border-color:#E57C7C;box-shadow:0 0 0 3px rgba(229,124,124,.18)}
+.rsvp-pill span{color:var(--gold-lt);background:rgba(10,8,5,.5);border-color:rgba(217,164,65,.5)}
+.rsvp-pill:hover span{background:rgba(217,164,65,.14)}
+.rsvp-pill input:checked + span{
+  background:linear-gradient(145deg,var(--gold-lt),var(--gold));
+  color:#241806;border-color:transparent;
+  box-shadow:0 12px 28px -12px rgba(217,164,65,.85);
+}
+.rsvp-stepper__btn{color:var(--gold-lt);background:rgba(10,8,5,.5);border-color:rgba(217,164,65,.5)}
+.rsvp-stepper__btn:hover{background:rgba(217,164,65,.16)}
+.rsvp-err{color:#F0A0A0}
+.rsvp-done__title{color:var(--maroon)}
+.rsvp-done__text{color:var(--ink)}
+
+/* little extras */
+.chip,.contact{background:rgba(24,19,10,.6);color:var(--ink)}
+
+/* ---------- LAPTOP / DESKTOP / TABLET-LANDSCAPE POLISH --------------------
+   The hero artwork is shown whole on landscape screens, so the text stays in
+   the dark curtain area (same % as on phones) instead of drifting down onto
+   the candles and table.                                                    */
+@media (min-aspect-ratio:1/1){
+  .scene--hero{--hero-safe-top:22%;--hero-safe-bottom:36%;--hero-safe-side:30%}
+  .hero-names{font-size:clamp(34px,7.2svh,66px)}
+  .hero-date__en{font-size:clamp(11px,1.8svh,16px)}
+  .hero-bless--top{padding-top:clamp(28px,6svh,64px)}
+  .sec-title{font-size:clamp(34px,4.2vw,54px)}
+  .invitation-card{max-width:780px!important}
+  .venue-grid{grid-template-columns:minmax(0,760px);justify-content:center}
+}
+@media (min-width:1100px){
+  .facts{max-width:980px;margin-inline:auto}
+  .btn-open:hover .btn-open__inner{box-shadow:inset 0 1px 0 rgba(255,232,180,.34),0 18px 46px -16px rgba(232,169,74,.5)}
+}
+
+/* phones held sideways / very short screens */
+@media (max-height:480px) and (orientation:landscape){
+  #landing .landing-inner .divider,
+  #landing .landing-hint{display:none}
+  #landing > .landing-inner.section-content{padding-top:14px;padding-bottom:12px}
+  #landing .landing-eyebrow .en{font-size:9px}
+  #landing .landing-names{font-size:clamp(26px,11svh,42px)}
+  #landing .landing-date{margin-top:4px;font-size:10px}
+  .scene--hero{--hero-safe-top:20%;--hero-safe-bottom:30%;--hero-safe-side:30%}
+  .hero-names{flex-direction:row;gap:.3em;align-items:baseline;font-size:clamp(24px,10svh,38px)}
+  .hero-names__amp{margin:0}
+  .hero-date{margin-top:4px}
+  .hero-date__ml{display:none}
+  .hero-bless--top{padding-top:10px}
+  .scroll-indicator{display:none}
+}
+
+/* very small phones */
+@media (max-width:360px){
+  #landing .landing-names{font-size:clamp(30px,10.5vw,40px)}
+  .btn-open__inner{padding:14px 22px}
+  .cd-unit{min-width:64px;padding:12px 8px 9px}
+}
