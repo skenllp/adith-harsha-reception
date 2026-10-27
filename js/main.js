@@ -42,6 +42,7 @@
     audioStarted = true;
     showAudioControl();
 
+    bgAudio.loop = true;
     bgAudio.volume = 0.72;
     var play = bgAudio.play();
     if (play && play.then) {

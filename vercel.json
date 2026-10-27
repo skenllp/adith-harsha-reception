@@ -1,6 +1,15 @@
 {
   "headers": [
     {
+      "source": "/og.jpg",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=0, must-revalidate"
+        }
+      ]
+    },
+    {
       "source": "/assets/images/share/(.*)",
       "headers": [
         {
