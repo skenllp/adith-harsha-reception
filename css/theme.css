@@ -23,9 +23,10 @@
 }
 #landing .landing-names{
   margin-top:10px;
-  font-size:clamp(34px,10vw,76px);
+  font-family:var(--f-names);
+  font-size:clamp(72px,17vw,120px);
   color:#FFF3DC;
-  text-shadow:0 2px 28px rgba(232,169,74,.38),0 2px 6px rgba(0,0,0,.7);
+  text-shadow:0 2px 28px rgba(232,169,74,.40),0 2px 6px rgba(0,0,0,.7);
 }
 #landing .landing-names .amp{color:var(--gold-lt)}
 #landing .landing-date{margin-top:12px}
@@ -78,7 +79,7 @@
   .scene--screen > picture.section-bg > img,
   .scene--screen > img.section-bg{object-position:center center}
   #landing > .landing-inner.section-content{padding-top:clamp(24px,6svh,60px)}
-  #landing .landing-names{flex-direction:row;gap:.35em;align-items:baseline;font-size:clamp(34px,6.4svh,64px)}
+  #landing .landing-names{flex-direction:row;gap:.15em;align-items:baseline;font-size:clamp(54px,8svh,92px)}
   #landing .landing-names .amp{margin:0}
 }
 
@@ -194,7 +195,7 @@
   #landing .landing-names{font-size:clamp(26px,11svh,42px)}
   #landing .landing-date{margin-top:4px;font-size:10px}
   .scene--hero{--hero-safe-top:20%;--hero-safe-bottom:30%;--hero-safe-side:30%}
-  .hero-names{flex-direction:row;gap:.3em;align-items:baseline;font-size:clamp(24px,10svh,38px)}
+  .hero-names{flex-direction:row;gap:.15em;align-items:baseline;font-size:clamp(44px,13svh,68px)}
   .hero-names__amp{margin:0}
   .hero-date{margin-top:4px}
   .hero-date__ml{display:none}
